@@ -3,7 +3,8 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   //js 
@@ -59,7 +60,9 @@ function App() {
   const handleCalculate=(e)=>{
     e.preventDefault()
     if( !principle || !rate || !year){
-      alert('please fill the form correctly')
+      toast.error("Please fill the form correctly", {
+        theme: "dark"
+      })
     }
     else{
       setInterest(principle*rate*year/100)
@@ -77,7 +80,7 @@ function App() {
       <div className='bg-light p-5 rounded' style={{width:'500px'}}>
         <h1>Simple Interest App</h1>
         <p>calculate your simple interest easily</p>
-        <div className='bg-warning mt-5 d-flex justify-content-center align-items-center w-100 flex-column shadow'>
+        <div className='bg-danger mt-5 d-flex justify-content-center align-items-center w-100 flex-column shadow'>
           <h1>₹{' '}{interest}</h1>
           <p>Total simple Interest</p>
         </div>
@@ -108,6 +111,7 @@ function App() {
           </Stack>
         </div>
         </div>       
+        <ToastContainer position='top-center' theme='colored' autoClose={2000} />
       </div>
   );
 }
